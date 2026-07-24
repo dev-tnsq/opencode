@@ -1640,6 +1640,7 @@ function ReasoningHeader(props: {
   duration?: string
 }) {
   const { theme } = useTheme()
+  const tuiConfig = useTuiConfig()
   const fg = () =>
     props.open
       ? RGBA.fromValues(theme.warning.r, theme.warning.g, theme.warning.b, theme.thinkingOpacity)
@@ -1649,7 +1650,9 @@ function ReasoningHeader(props: {
     <Switch>
       <Match when={!props.done}>
         <box flexDirection="row">
-          <Spinner color={fg()}>{props.title ? "Thinking: " + props.title : "Thinking"}</Spinner>
+          <Spinner color={fg()} verbs={tuiConfig.spinner_verbs}>
+            {props.title ? "Thinking: " + props.title : "Thinking"}
+          </Spinner>
         </box>
       </Match>
       <Match when={true}>
